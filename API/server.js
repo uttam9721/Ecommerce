@@ -6,6 +6,7 @@ import bodyParser from 'express';
 import productRouter from './Routes/product.js'
 // import { Cart } from './Models/Card.js';
 import cartRouter from './Routes/cart.js';
+import addressRouter from './Routes/address.js';
 const app = express();
 
 app.use(bodyParser.json());
@@ -29,7 +30,9 @@ app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
 
 
+// address router
 
+app.use('/api/address',addressRouter)
 
 
 

@@ -1,6 +1,8 @@
 // import { User } from "../Models/User.js";
 import { User } from "../Models/User.js"; // Make sure the path is correct and includes the .js extension
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
+
 
 // user register
 export const register = async (req, res) => {
@@ -30,9 +32,17 @@ export const login = async (req, res) => {
 
     // if user found then
     const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword)
-      return res.json({ message: "invalid credential", success: false });
-    res.json({ message: `welcome ${user.name}`, success: true, user });
+    if (!validPassword)return res.json({ message: "invalid credential", success: false });
+
+    const token = jwt.sign({userId:user._id},"!@#$%^&*()",{
+      expiresIn: "365d",
+    })
+
+
+
+
+
+    res.json({ message: `welcome ${user.name}`,token, success: true, user });
   } catch (error) {
     res.json({ message: error.message });
   }
@@ -47,3 +57,10 @@ export const users = async (req, res) => {
     res.json({ message: error.message });
   }
 };
+
+
+// get profile
+
+export const profile = (req, res) => {
+  res.json({user: req.user})
+}
