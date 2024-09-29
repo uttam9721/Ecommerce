@@ -1,17 +1,18 @@
 import React, { useContext } from 'react'
 import AppContext from './context/AppContext'
-import ShowProduct from './components/ShowProduct'
-// import ShowProduct from './components/product/ShowProduct';
+import ShowProduct from './components/product/ShowProduct';
+import ProductDetails from './components/product/ProductDetails';
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 const App = () => {
-  // const {data}= useContext(AppContext);
   return (
-    <div>
-      {/* <h1>Hello Uttam {data}</h1> */}
-      <>
-      <ShowProduct />
-      </>
-    </div>
+        <Router>
+          <Routes>
+      <Route path='/' element={<ShowProduct />}></Route>
+      <Route path='/product/:id' element={<ProductDetails />}/>
+      </Routes>
+      </Router>
+    
   )
 }
 
-export default App
+export default App;

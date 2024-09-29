@@ -2,3 +2,6 @@ body{
   background-color: black;
   color: #fff;
 }
+body::-webkit-scrollbar{
+  display: none;
+}
