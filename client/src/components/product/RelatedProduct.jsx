@@ -10,7 +10,7 @@ const RelatedProduct = ({ category }) => {
     if (products && category) { 
       // Ensure products and category are available before filtering
       const filteredProducts = products.filter(
-        (data) => data.category.toLowerCase() === category.toLowerCase()
+        (data) => data?.category?.toLowerCase() === category?.toLowerCase()
       );
       setRelatedProduct(filteredProducts);
     }
