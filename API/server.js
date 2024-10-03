@@ -7,9 +7,19 @@ import productRouter from './Routes/product.js'
 // import { Cart } from './Models/Card.js';
 import cartRouter from './Routes/cart.js';
 import addressRouter from './Routes/address.js';
-const app = express();
+import cors from 'cors';
 
+const app = express();
 app.use(bodyParser.json());
+
+app.use(cors({
+    origin:true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials:true
+}))
+
+
+
 
 
 // home testing route
