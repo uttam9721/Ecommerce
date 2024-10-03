@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchProduct from './product/SearchProduct';
-
+import AppContext from '../context/AppContext';
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const {setFilteredData,products} = useContext(AppContext);
+
+  const filterbyCategory = (cat) => {
+    setFilteredData(
+      products.filter((data) => data.category.toLowerCase() === cat.toLowerCase())
+    );
+  };
+  
+
 
   const submitHandler = (e) => {
     e.preventDefault(); // Prevent the form from refreshing the page
@@ -15,6 +25,8 @@ const Navbar = () => {
     }
     setSearchTerm(" "); // Reset the search term
   };
+  console.log(products);
+
 
   return (
     <>
@@ -37,12 +49,23 @@ const Navbar = () => {
           <div className="right">
             <button className="btn btn-warning mx-3">Cart</button>
             <button className="btn btn-warning mx-3">Profile</button>
-            <button className="btn btn-warning mx-3">Login</button>
-            <button className="btn btn-warning mx-3">Register</button>
+            <Link to={'/login'} className="btn btn-secondary mx-3">Login</Link>
+            <Link to={'/register'} className="btn btn-info mx-3">Register</Link>
             <button className="btn btn-warning mx-3">Logout</button>
           </div>
         </div>
-        <div className="sub_bar"></div>
+        <div className="sub_bar">
+          <div className="items" onClick={()=>filterbyCategory(products)}>No Filter</div>
+          <div className="items" onClick={()=>filterbyCategory('mobiles')}>Mobiles</div>
+          <div className="items" onClick={()=>filterbyCategory('laptop')}>Laptop</div>
+          <div className="items" onClick={()=>filterbyCategory('cameras')}>Camera's</div>
+          <div className="items" onClick={()=>filterbyCategory('headphones')}>Headphones</div>
+          <div className="items">15999</div>
+          <div className="items">49999</div>
+          <div className="items">65000</div>
+          <div className="items">35000</div>
+          <div className="items">25803</div>
+        </div>
       </div>
     </>
   );

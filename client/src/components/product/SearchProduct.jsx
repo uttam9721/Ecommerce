@@ -8,6 +8,8 @@ const SearchProduct = ({ category }) => {
   
   const { term } = useParams(); // Get the search term from the URL
 
+  // console.log(useParams);
+
   useEffect(() => {
     if (products) {
       let filteredProducts = products;
