@@ -13,6 +13,7 @@ const AppState = (props) => {
   const [token, setToken] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [filteredData, setFilteredData] = useState([])
+  const [user,setUser] = useState()
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -25,6 +26,7 @@ const AppState = (props) => {
         setProducts(api.data.products); // Store products in state
         setProducts(api.data.products)
         setFilteredData(api.data.products)
+        userProfile();
 
         toast.success(api.data.message, {
           position: "top-right",
@@ -57,6 +59,21 @@ const AppState = (props) => {
     };
     fetchProduct();
   }, [token]);
+
+
+  useEffect(() => {
+    let lstoken = localStorage.getItem('token')
+    // console.log("ls token ")
+    // setToken(lstoken)
+    
+  //  setToken(localStorage.getItem('token'))
+  if(lstoken){
+    setToken(lstoken);
+     setIsAuthenticated(true) ;
+    
+  }
+  }, [])
+  
 
   // Register user
   const register = async (name, email, password) => {
@@ -149,6 +166,40 @@ const AppState = (props) => {
     }
   };
 
+  // logout user
+  const logout=()=>{
+    setIsAuthenticated(false);
+    setToken(" ");
+    localStorage.removeItem('token');
+    toast.success("Logout successfully", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+
+  }
+
+  // user profile
+  const userProfile = async () => {
+    // try {
+      const api = await axios.get(`${url}/user/profile`, {
+        headers: {
+          "Content-Type": "Application/json",
+          "Auth":token
+        },
+        withCredentials: true,
+      });
+      // console.log("user profile",api.data.user)
+      setUser(api.data.user)
+    
+    };
+
   return (
     <AppContext.Provider
       value={{
@@ -163,6 +214,8 @@ const AppState = (props) => {
         isAuthenticated,
         filteredData,
         setFilteredData,
+        logout,
+        user,
       }}
     >
       {props.children}
