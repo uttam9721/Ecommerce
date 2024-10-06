@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
   import Login from './components/user/Login';
 import Profile from './components/user/Profile';
 import Cart from './components/Cart';
+import Address from './components/Address';
 const App = () => {
   return (
         <Router>
@@ -24,6 +25,8 @@ const App = () => {
       <Route path='/login' element={<Login/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/cart' element={<Cart/>}/>
+      {/* <Route path='/address' element={<Address/>}/> */}
+      <Route path='/shipping' element={<Address/>}/>
       </Routes>
       </Router>
     

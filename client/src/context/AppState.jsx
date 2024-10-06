@@ -16,6 +16,7 @@ const AppState = (props) => {
   const [user,setUser] = useState()
   const [cart, setCart] = useState([]);
   const [reload, setReload] = useState(false);
+  const [userAddress, setUserAddress] = useState()
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -61,6 +62,7 @@ const AppState = (props) => {
     };
     fetchProduct();
     userCart();
+    getAddress();
   }, [token,reload]);
 
 
@@ -245,7 +247,7 @@ const AppState = (props) => {
   };
 
 
-  // Remove qty
+  // Dec qty
   const decQty = async (productId,qty) => {
     const api = await axios.post(`${url}/cart/--qty`,{productId,qty}, {
       headers: {
@@ -272,8 +274,103 @@ toast.success(api.data.message, {
 //  setReload(!reload)
   };
 
+  // remove item from cart
+
+  const removeFromCart = async (productId) => {
+    const api = await axios.delete(`${url}/cart/remove/${productId}`,{
+      headers: {
+        "Content-Type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true,
+    });
+
+//  console.log("remove item from cart",api)
+//  setCart(api.data.cart);
+setReload(!reload)
+toast.success(api.data.message, {
+  position: "top-right",
+  autoClose: 1500,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+  transition: Bounce,
+});
+//  setReload(!reload)
+  };
+
+  // clear cart
+  const clearCart = async () => {
+    const api = await axios.delete(`${url}/cart/clear`,{
+      headers: {
+        "Content-Type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true,
+    });
+
+//  console.log("remove item from cart",api)
+//  setCart(api.data.cart);
+setReload(!reload)
+toast.success(api.data.message, {
+  position: "top-right",
+  autoClose: 1500,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+  transition: Bounce,
+});
+//  setReload(!reload)
+  };
     
-    
+// AddShipping address
+const shippingAddress = async ( fullName, address, city, state, country, pincode, phoneNumber) => {
+  const api = await axios.post(`${url}/address/add`,{ fullName, address, city, state, country, pincode, phoneNumber},{
+    headers: {
+      "Content-Type": "Application/json",
+      Auth:token
+    },
+    withCredentials: true,
+  });
+
+//  console.log("remove item from cart",api)
+//  setCart(api.data.cart);
+setReload(!reload)
+toast.success(api.data.message, {
+position: "top-right",
+autoClose: 1500,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+transition: Bounce,
+});
+//  setReload(!reload)
+return api.data;
+};
+  
+// get user latest address
+const getAddress = async () => {
+  // try {
+    const api = await axios.get(`${url}/address/get`, {
+      headers: {
+        "Content-Type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true,
+    });
+  // console.log("user address",api.data)
+  setUserAddress(api.data.userAddress);
+
+  }
 
   return (
     <AppContext.Provider
@@ -294,6 +391,10 @@ toast.success(api.data.message, {
         addToCart,
         cart,
         decQty,
+        removeFromCart,
+        clearCart,
+        shippingAddress,
+        userAddress,
         
       }}
     >

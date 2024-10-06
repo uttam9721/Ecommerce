@@ -50,16 +50,20 @@ const Navbar = () => {
           <div className="right">
             {isAuthenticated &&(
               <>
+             
             
             {/* <button className="btn btn-warning mx-3">Cart</button> */}
             <Link to={'/cart'} type="button" className="btn btn-primary position-relative mx-3">
             <span className="material-symbols-outlined">
 shopping_cart
 </span>
+{cart?.items?.length>0 &&(
+                
   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
    {cart?.items?.length}
     <span className="visually-hidden">unread messages</span>
   </span>
+              )}
 </Link>
             <Link to={'/profile'} className="btn btn-info mx-3">Profile</Link>
             <button
