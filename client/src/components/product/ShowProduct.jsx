@@ -6,12 +6,12 @@ const ShowProduct = () => {
   const { products, filteredData, addToCart } = useContext(AppContext);
 
   return (
-    <div className="container">
+    <div className="container ">
       <div className="row d-flex justify-content-center align-items-center">
         {filteredData?.map((product) => (
           <div key={product._id} className="my-5 col-md-4 d-flex">
             <div
-              className="card bg-dark text-light text-center"
+              className="card bg-dark text-light text-center innter_box"
               style={{ width: "18rem" }}
             >
               <Link
