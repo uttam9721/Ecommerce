@@ -25,9 +25,6 @@ const Login = () => {
 
  const result=   await login( email, password);
     console.log(formData);
-
-    
-   
    if(result.success){
     navigate('/')
    }
