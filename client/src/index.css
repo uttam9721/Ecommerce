@@ -61,7 +61,7 @@ body::-webkit-scrollbar{
   font-weight: bold;
 }
 .sub_bar .items:hover{
-  /* background-color: #000; */
+  background-color: #000 !important;
   color: #000;
   cursor: pointer;
   box-shadow: 2px 2px 10px red ;
@@ -70,7 +70,7 @@ body::-webkit-scrollbar{
   
 
 }
-.innter_box{
+/* .innter_box{
   background-color: rgb(174, 175, 175) !important;
   border: 3px solid rgb(163, 162, 162) !important;
   box-shadow: 2px 2px 15px rgb(247, 247, 247);
@@ -79,4 +79,4 @@ body::-webkit-scrollbar{
 .innter_box:hover{
   box-shadow: 5px 5px 20px rgb(235, 53, 53);
   transition: 0.5s ease-in-out;
-}
+} */
