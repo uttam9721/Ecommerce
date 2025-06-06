@@ -3,11 +3,9 @@ import { User } from "../Models/User.js"; // Make sure the path is correct and i
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 
-
 // user register
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
-
   try {
     let user = await User.findOne({ email: email });
     if (user)
@@ -37,11 +35,6 @@ export const login = async (req, res) => {
     const token = jwt.sign({userId:user._id},"!@#$%^&*()",{
       expiresIn: "365d",
     })
-
-
-
-
-
     res.json({ message: `welcome ${user.name}`,token, success: true, user });
   } catch (error) {
     res.json({ message: error.message });
