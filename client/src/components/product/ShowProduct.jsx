@@ -32,7 +32,7 @@ const ShowProduct = () => {
               </Link>
               <div className="card-body">
                 <h5 className="card-title">{product.title}</h5>
-                <p className="card-text">{product.description}</p>
+                {/* <p className="card-text">{product.description}</p> */}
                 <div className="my-3">
                   <button className="btn btn-primary">{`Price:₹ ${product.price} `}</button>
                   <button
