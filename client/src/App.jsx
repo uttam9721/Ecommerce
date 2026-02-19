@@ -4,6 +4,7 @@ import ShowProduct from './components/product/ShowProduct';
 import ProductDetails from './components/product/ProductDetails';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/user/Footer';
 import SearchProduct from './components/product/SearchProduct';
 import Register from './components/user/Register';
 import { ToastContainer, toast } from 'react-toastify';
@@ -27,11 +28,11 @@ const App = () => {
       <Route path='/login' element={<Login/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/cart' element={<Cart/>}/>
-      {/* <Route path='/address' element={<Address/>}/> */}
       <Route path='/shipping' element={<Address/>}/>
       <Route path='/checkout' element={<Checkout/>}/>
       <Route path='/table' element={<TableProduct/>}/>
       </Routes>
+      <Footer />
       </Router>
     
   )

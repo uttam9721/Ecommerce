@@ -6,15 +6,12 @@ const SearchProduct = ({ category }) => {
   const { products } = useContext(AppContext); // Access products from context
   const [searchProduct, setSearchProduct] = useState([]);
   
-  const { term } = useParams(); // Get the search term from the URL
-
-  // console.log(useParams);
+  const { term } = useParams();
 
   useEffect(() => {
     if (products) {
       let filteredProducts = products;
 
-      // Apply category filter if a category is provided
       if (category) {
         filteredProducts = filteredProducts.filter(
           (product) => product?.category?.toLowerCase() === category.toLowerCase()
